@@ -1,5 +1,44 @@
 # This file is managed by Puppet
-URI <%= @uris_space %>
-BASE <%= @base_dn %>
-TLS_REQCERT allow
-TLS_CACERTDIR /etc/openldap/certs
+URI                         <%= @uris_space %>
+BASE                        <%= @base_dn %>
+TIMELIMIT                   <%= @timelimit %>
+<% if @bind_dn && @bind_pw %>
+BIND_DN                     <%= @bind_dn %>
+BIND_PW                     <%= @bind_pw %>
+<% end -%>
+BIND_TIMELIMIT              <%= @bind_timelimit %>
+BIND_POLICY                 <%= @bind_policy %>
+IDLE_TIMELIMIT              <%= @idle_timelimit %>
+TLS_REQCERT                 allow
+TLS_CACERTDIR               /etc/openldap/certs
+PAM_FILTER                  <%= @pam_filter %>
+PAM_MIN_UID                 <%= @pam_min_uid %>
+PAM_LOGIN_ATTRIBUTE         <%= @pam_login_attribute %>
+PAM_MEMBER_ATTRIBUTE        <%= @pam_member_attribute %>
+NSS_RECONNECT_TRIES         <%= @nss_reconnect_tries %>
+NSS_RECONNECT_SLEEPTIME     <%= @nss_reconnect_sleeptime %>
+NSS_RECONNECT_MAXSLEEPTIME  <%= @nss_reconnect_maxsleeptime %>
+NSS_RECONNECT_MAXCONNTRIES  <%= @nss_reconnect_maxconntries %>
+NSS_INITGROUPS_IGNOREUSERS  <%= @nss_initgroups_ignoreusers %>
+
+<% if @directory_type == 'ad' %>
+PAM_PASSWORD          ad
+PAM_MEMBER_ATTRIBUTE  msSFU30PosixMember
+PAM_LOGIN_ATTRIBUTE   msSFU30Name
+NSS_MAP_OBJECTCLASS   posixAccount User
+NSS_MAP_OBJECTCLASS   shadowAccount User
+NSS_MAP_OBJECTCLASS   posixGroup Group
+NSS_MAP_ATTRIBUTE     uid msSFU30Name
+NSS_MAP_ATTRIBUTE     uniqueMember msSFU30PosixMember
+NSS_MAP_ATTRIBUTE     homeDirectory msSFU30HomeDirectory
+NSS_MAP_ATTRIBUTE     uidNumber msSFU30UidNumber
+NSS_MAP_ATTRIBUTE     gidNumber msSFU30GidNumber
+NSS_MAP_ATTRIBUTE     loginShell msSFU30LoginShell
+NSS_MAP_ATTRIBUTE     gecos cn
+NSS_MAP_ATTRIBUTE     cn msSFU30Name
+<% end %>
+
+<% @extra_ldap_options.each do |value| %>
+<%= value %>
+<% end -%>
+

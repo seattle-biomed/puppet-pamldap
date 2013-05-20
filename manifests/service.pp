@@ -1,5 +1,7 @@
-class pamldap::service {
-  service { 'sssd':
+class pamldap::service (
+  $service_name = $pamldap::params::service_name
+) inherits pamldap::params {
+  service { $service_name:
     ensure     => running,
     hasstatus  => true,
     hasrestart => true,
