@@ -6,7 +6,7 @@ class pamldap::params {
   $bind_policy                = 'hard'
   $idle_timelimit             = '3600'
   $pam_login_attribute        = 'uid'
-  $pam_member_attribute       = 'mumberUid'
+  $pam_member_attribute       = 'memberUid'
   $pam_filter                 = 'objectclass=posixAccount'
   $pam_min_uid                = '1000'
   $nss_reconnect_tries        = '2'
