@@ -5,6 +5,7 @@ class pamldap::config (
   $bind_pw                    = undef,
   $krb5_realm                 = undef,
   $krb5_servers               = [],
+  $krb5_kpasswd               = "default",
   $directory_type             = $pamldap::params::directory_type,
   $ldap_conf_file             = $pamldap::params::ldap_conf_file,
   $timelimit                  = $pamldap::params::timelimit,
@@ -21,7 +22,7 @@ class pamldap::config (
   $pam_min_uid                = $pamldap::params::pam_min_uid,
   $nss_initgroups_ignoreusers = $pamldap::params::nss_initgroups_ignoreusers,
   $extra_ldap_options         = [],
-  $extra_sss_options          = []
+  $extra_sss_options          = [],
 ) inherits pamldap::params {
   $uris_space = join($uris, ' ')
   $uris_comma = join($uris, ',')
