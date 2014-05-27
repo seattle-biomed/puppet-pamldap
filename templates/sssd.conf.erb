@@ -28,7 +28,6 @@ chpass_provider = krb5
 ldap_schema     = rfc2307bis
 
 <% if @bind_dn && @bind_pw %>
-ldap_default_bind_dn  = <%= @bind_dn %>
 ldap_default_bind_dn      = <%= @bind_dn %>
 ldap_default_authtok_type = password
 ldap_default_authtok      = <%= @bind_pw %>
