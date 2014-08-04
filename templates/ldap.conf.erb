@@ -23,19 +23,15 @@ NSS_INITGROUPS_IGNOREUSERS  <%= @nss_initgroups_ignoreusers %>
 
 <% if @directory_type == 'ad' %>
 PAM_PASSWORD          ad
-PAM_MEMBER_ATTRIBUTE  msSFU30PosixMember
-PAM_LOGIN_ATTRIBUTE   msSFU30Name
+PAM_MEMBER_ATTRIBUTE  member
+PAM_LOGIN_ATTRIBUTE   sAMAccountName
 NSS_MAP_OBJECTCLASS   posixAccount User
 NSS_MAP_OBJECTCLASS   shadowAccount User
 NSS_MAP_OBJECTCLASS   posixGroup Group
-NSS_MAP_ATTRIBUTE     uid msSFU30Name
-NSS_MAP_ATTRIBUTE     uniqueMember msSFU30PosixMember
-NSS_MAP_ATTRIBUTE     homeDirectory msSFU30HomeDirectory
-NSS_MAP_ATTRIBUTE     uidNumber msSFU30UidNumber
-NSS_MAP_ATTRIBUTE     gidNumber msSFU30GidNumber
-NSS_MAP_ATTRIBUTE     loginShell msSFU30LoginShell
-NSS_MAP_ATTRIBUTE     gecos cn
-NSS_MAP_ATTRIBUTE     cn msSFU30Name
+NSS_MAP_ATTRIBUTE     uid sAMAccountName
+NSS_MAP_ATTRIBUTE     uniqueMember member
+NSS_MAP_ATTRIBUTE     homeDirectory unixHomeDirectory
+NSS_MAP_ATTRIBUTE     gecos name
 <% end %>
 
 <% @extra_ldap_options.each do |value| %>
